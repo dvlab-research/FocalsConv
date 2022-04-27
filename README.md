@@ -1,4 +1,4 @@
-[![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](-)
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2204.12463)
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=dvlab-research/FocalsConv)
 
 
@@ -6,7 +6,7 @@
 
 This is the official implementation of ***Focals Conv*** (CVPR 2022), a new sparse convolution design for 3D object detection (feasible for both lidar-only and multi-modal settings). For more details, please refer to:
 
-**Focal Sparse Convolutional Networks for 3D Object Detection [[Paper](-)]** <br />
+**Focal Sparse Convolutional Networks for 3D Object Detection [[Paper](https://arxiv.org/abs/2204.12463)]** <br />
 Yukang Chen, Yanwei Li, Xiangyu Zhang, Jian Sun, Jiaya Jia<br />
 
 <p align="center"> <img src="docs/imgs/FocalSparseConv23D.png" width="100%"> </p>
