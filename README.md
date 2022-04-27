@@ -53,8 +53,8 @@ Following the install documents for [OpenPCdet](OpenPCDet/docs/INSTALL.md) and [
 
 Download and organize the official [KITTI](OpenPCDet/docs/GETTING_STARTED.md) and [Waymo](OpenPCDet/docs/GETTING_STARTED.md) following the document in OpenPCdet, and [nuScenes](CenterPoint/docs/NUSC.md) from the CenterPoint codebase.
 
-*Note that for nuScenes dataset, we use image-level gt-sampling (copy-paste) in the multi-modal setting.
-Please download this [dbinfos_train_10sweeps_withvelo.pkl](https://drive.google.com/file/d/1ypJKpZifM-NsGdUSLMFpBo-KaXlfpplR/view?usp=sharing) to replace the original one for training. ([Google](https://drive.google.com/file/d/1ypJKpZifM-NsGdUSLMFpBo-KaXlfpplR/view?usp=sharing) \| [Baidu](https://pan.baidu.com/s/1iz1KWthc1XhXG3du3QG__w) (key: b466))
+*Note that for nuScenes dataset, we use image-level gt-sampling (copy-paste) in the multi-modal training.
+Please download this [dbinfos_train_10sweeps_withvelo.pkl](https://drive.google.com/file/d/1ypJKpZifM-NsGdUSLMFpBo-KaXlfpplR/view?usp=sharing) to replace the original one. ([Google](https://drive.google.com/file/d/1ypJKpZifM-NsGdUSLMFpBo-KaXlfpplR/view?usp=sharing) \| [Baidu](https://pan.baidu.com/s/1iz1KWthc1XhXG3du3QG__w) (key: b466))
 
 *Note that for nuScenes dataset, we conduct ablation studies on a 1/4 data training split. 
 Please download [infos_train_mini_1_4_10sweeps_withvelo_filter_True.pkl](https://drive.google.com/file/d/19-Zo8o0OWZYed0UpnOfDqTY5oLXKJV9Q/view?usp=sharing) if you needed for training. ([Google](https://drive.google.com/file/d/19-Zo8o0OWZYed0UpnOfDqTY5oLXKJV9Q/view?usp=sharing) \| [Baidu](https://pan.baidu.com/s/1VbkNBs155JyJLhNtSlbEGQ) (key: 769e))
