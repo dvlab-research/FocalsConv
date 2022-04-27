@@ -59,6 +59,12 @@ Please download this [dbinfos_train_10sweeps_withvelo.pkl](https://drive.google.
 *Note that for nuScenes dataset, we conduct ablation studies on a 1/4 data training split. 
 Please download [infos_train_mini_1_4_10sweeps_withvelo_filter_True.pkl](https://drive.google.com/file/d/19-Zo8o0OWZYed0UpnOfDqTY5oLXKJV9Q/view?usp=sharing) if you needed for training. ([Google](https://drive.google.com/file/d/19-Zo8o0OWZYed0UpnOfDqTY5oLXKJV9Q/view?usp=sharing) \| [Baidu](https://pan.baidu.com/s/1VbkNBs155JyJLhNtSlbEGQ) (key:769e))
 
+d. Download pre-trained models.
+If you want to directly evaluate the trained models we provide, please download them first.
+
+If you want to train by yourselvef, for multi-modal settings, please download this resnet pre-train model first,
+[torchvision-res50-deeplabv3](https://download.pytorch.org/models/deeplabv3_resnet50_coco-cd0a2569.pth).
+
 
 ### Evaluation
 We provide the trained weight file so you can just run with that. You can also use the model you trained.
