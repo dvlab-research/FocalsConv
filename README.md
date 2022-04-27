@@ -39,17 +39,17 @@ Visualization of voxel distribution of Focals Conv on KITTI val dataset:
 ## Getting Started
 ### Installation
 
-a. Clone this repository
+#### a. Clone this repository
 ```shell
 https://github.com/dvlab-research/FocalsConv && cd FocalsConv
 ```
-b. Install the environment
+#### b. Install the environment
 
 Following the install documents for [OpenPCdet](OpenPCDet/docs/INSTALL.md) and [CenterPoint](CenterPoint/docs/INSTALL.md) codebases respectively, based on your preference.
 
 *spconv 2.x is highly recommended instead of spconv 1.x version.
 
-c. Prepare the datasets. 
+#### c. Prepare the datasets. 
 
 Download and organize the official [KITTI](OpenPCDet/docs/GETTING_STARTED.md) and [Waymo](OpenPCDet/docs/GETTING_STARTED.md) following the document in OpenPCdet, and [nuScenes](CenterPoint/docs/NUSC.md) from the CenterPoint codebase.
 
@@ -59,7 +59,7 @@ Please download this [dbinfos_train_10sweeps_withvelo.pkl](https://drive.google.
 *Note that for nuScenes dataset, we conduct ablation studies on a 1/4 data training split. 
 Please download [infos_train_mini_1_4_10sweeps_withvelo_filter_True.pkl](https://drive.google.com/file/d/19-Zo8o0OWZYed0UpnOfDqTY5oLXKJV9Q/view?usp=sharing) if you needed for training. ([Google](https://drive.google.com/file/d/19-Zo8o0OWZYed0UpnOfDqTY5oLXKJV9Q/view?usp=sharing) \| [Baidu](https://pan.baidu.com/s/1VbkNBs155JyJLhNtSlbEGQ) (key:769e))
 
-d. Download pre-trained models.
+#### d. Download pre-trained models.
 If you want to directly evaluate the trained models we provide, please download them first.
 
 If you want to train by yourselvef, for multi-modal settings, please download this resnet pre-train model first,
