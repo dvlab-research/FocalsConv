@@ -130,6 +130,7 @@ def split_voxels(x, b, imps_3d, voxels_3d, kernel_offsets, mask_multi=True, topk
     spatial_indices = (selected_indices[:, 0] >0) * (selected_indices[:, 1] >0) * (selected_indices[:, 2] >0)  * \
                         (selected_indices[:, 0] < x.spatial_shape[0]) * (selected_indices[:, 1] < x.spatial_shape[1]) * (selected_indices[:, 2] < x.spatial_shape[2])
     selected_indices = selected_indices[spatial_indices]
+    mask_kernel_fore = mask_kernel_fore[spatial_indices]
     selected_indices = torch.cat([torch.ones((selected_indices.shape[0], 1), device=features_fore.device)*b, selected_indices], dim=1)
 
     selected_features = torch.zeros((selected_indices.shape[0], features_ori.shape[1]), device=features_fore.device)
