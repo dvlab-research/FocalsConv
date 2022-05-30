@@ -61,7 +61,7 @@ class SegTemplate(nn.Module):
             if not checkpoint_path.exists():
                 checkpoint = checkpoint_path.name
                 save_dir = checkpoint_path.parent
-                save_dir.mkdir(parents=True)
+                save_dir.mkdir(parents=True, exist_ok=True)
                 url = f'https://download.pytorch.org/models/{checkpoint}'
                 hub.load_state_dict_from_url(url, save_dir)
 
