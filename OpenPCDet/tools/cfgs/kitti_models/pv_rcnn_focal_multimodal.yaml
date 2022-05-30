@@ -50,7 +50,7 @@ MODEL:
     BACKBONE_3D:
         NAME: VoxelBackBone8xFocal
         USE_IMG: True
-        IMG_PRETRAIN: "checkpoints/deeplabv3_resnet50_coco-cd0a2569.pth"
+        IMG_PRETRAIN: "../checkpoints/deeplabv3_resnet50_coco-cd0a2569.pth"
 
     MAP_TO_BEV:
         NAME: HeightCompression
