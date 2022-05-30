@@ -56,7 +56,7 @@ model = dict(
             backbone='ResNet50',
             num_class=21, # pretrained on COCO 
             args={"feat_extract_layer": ["layer1"],
-                  "pretrained_path": "checkpoints/deeplabv3_resnet50_coco-cd0a2569.pth"},
+                  "pretrained_path": "../checkpoints/deeplabv3_resnet50_coco-cd0a2569.pth"},
             channel_reduce={
                 "in_channels": [256],
                 "out_channels": [16],
