@@ -100,7 +100,7 @@ class FocalSparseConv(spconv.SparseModule):
             voxels_2d_int_list.append(voxels_2d_int)
 
             image_features_batch = torch.zeros((voxel_features_sparse.shape[0], x_rgb_batch.shape[0]), device=x_rgb_batch.device)
-            image_features_batch[filter_idx] = x_rgb_batch[:, voxels_2d_int[:, 1], voxels_2d_int[:, 0]].permute(1, 0)
+            image_features_batch[filter_idx] = x_rgb_batch[:, voxels_2d_int[:, 1], voxels_2d_int[:, 0]].permute(1, 0).contiguous()
 
             if fuse_sum:
                 image_with_voxelfeature = image_features_batch + voxel_features_sparse
