@@ -50,15 +50,15 @@ class VoxelWithPointProjection(nn.Module):
 
         if self.fuse_mode == 'sum':
             fuse_feat = image_feat[:,image_grid[:,0],image_grid[:,1]]
-            voxel_feat += fuse_feat.permute(1,0)
+            voxel_feat += fuse_feat.permute(1,0).contiguous()
         elif self.fuse_mode == 'mean':
             fuse_feat = image_feat[:,image_grid[:,0],image_grid[:,1]]
-            voxel_feat = (voxel_feat + fuse_feat.permute(1,0)) / 2
+            voxel_feat = (voxel_feat + fuse_feat.permute(1,0).contiguous()) / 2
         elif self.fuse_mode == 'concat':
             fuse_feat = image_feat[:,image_grid[:,0],image_grid[:,1]]
-            concat_feat = torch.cat([fuse_feat, voxel_feat.permute(1,0)], dim=0)
+            concat_feat = torch.cat([fuse_feat, voxel_feat.permute(1,0).contiguous()], dim=0)
             voxel_feat = self.fuse_blocks[layer_name](concat_feat.unsqueeze(0))[0]
-            voxel_feat = voxel_feat.permute(1,0)
+            voxel_feat = voxel_feat.permute(1,0).contiguous()
         else:
             raise NotImplementedError
         
