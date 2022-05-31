@@ -50,7 +50,7 @@ class PyramidFeat2D(nn.Module):
         """
         # Pixel-wise depth classification
         batch_dict = {}
-        images = images.permute(0, 3, 1, 2)
+        images = images.permute(0, 3, 1, 2).contiguous()
         ifn_result = self.ifn(images)
 
         for _idx, _layer in enumerate(self.model_cfg.args['feat_extract_layer']):
