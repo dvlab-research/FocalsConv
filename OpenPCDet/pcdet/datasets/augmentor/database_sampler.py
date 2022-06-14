@@ -400,10 +400,13 @@ class DataBaseSampler(object):
                     sampled_gt_boxes2d.append(sampled_boxes2d)
                 valid_sampled_dict = [sampled_dict[x] for x in valid_mask]
                 valid_sampled_boxes = sampled_boxes[valid_mask]
-                mv_height = mv_height[valid_mask]
+                
+                if self.sampler_cfg.get('USE_ROAD_PLANE', False):
+                    mv_height = mv_height[valid_mask]
+                    sampled_mv_height = np.concatenate((sampled_mv_height, mv_height), axis=0)
 
                 existed_boxes = np.concatenate((existed_boxes, valid_sampled_boxes), axis=0)
-                sampled_mv_height = np.concatenate((sampled_mv_height, mv_height), axis=0)
+                #sampled_mv_height = np.concatenate((sampled_mv_height, mv_height), axis=0)
                 total_valid_sampled_dict.extend(valid_sampled_dict)
 
         sampled_gt_boxes = existed_boxes[gt_boxes.shape[0]:, :]
