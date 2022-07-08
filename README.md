@@ -15,7 +15,7 @@ Yukang Chen, Yanwei Li, Xiangyu Zhang, Jian Sun, Jiaya Jia<br />
 
 ## News
 - [2022-07-05] The code for Focals Conv has been marged into the official [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) codebase.
-- [2022-06-21] The other 3D backbone network design, LargeKernel3D ([Paper](https://arxiv.org/abs/2206.10555) \| [Github](https://github.com/dvlab-research/LargeKernel3D)), is presented. 
+- [2022-06-21] The other 3D backbone network design, ***LargeKernel3D*** ([Paper](https://arxiv.org/abs/2206.10555) \| [Github](https://github.com/dvlab-research/LargeKernel3D)), is presented. 
 
 
 ### Experimental results
