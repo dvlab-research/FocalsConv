@@ -122,7 +122,8 @@ class VoxelBackBone8xFocal(nn.Module):
         skip_mask_kernel_image =  model_cfg.get('SKIP_MASK_KERNEL_IMG', False)
         enlarge_voxel_channels = model_cfg.get('ENLARGE_VOXEL_CHANNELS', -1)
         img_pretrain = model_cfg.get('IMG_PRETRAIN', "checkpoints/deeplabv3_resnet50_coco-cd0a2569.pth")
-
+        use_stages = model_cfg.get('USE_STAGES', [1, 2, 3])
+        
         if use_img:
             model_cfg_seg=dict(
                 name='SemDeepLabV3',
@@ -153,7 +154,7 @@ class VoxelBackBone8xFocal(nn.Module):
 
         self.conv1 = SparseSequentialBatchdict(
             block(16, 16, 3, norm_fn=norm_fn, padding=1, indice_key='subm1'),
-            special_spconv_fn(16, 16, voxel_stride=1, norm_fn=norm_fn, indice_key='focal1'),
+            special_spconv_fn(16, 16, voxel_stride=1, norm_fn=norm_fn, indice_key='focal1') if 1 in use_stages else None,
         )
 
         self.conv2 =SparseSequentialBatchdict(
@@ -161,7 +162,7 @@ class VoxelBackBone8xFocal(nn.Module):
             block(16, 32, 3, norm_fn=norm_fn, stride=2, padding=1, indice_key='spconv2', conv_type='spconv'),
             block(32, 32, 3, norm_fn=norm_fn, padding=1, indice_key='subm2'),
             block(32, 32, 3, norm_fn=norm_fn, padding=1, indice_key='subm2'),
-            special_spconv_fn(32, 32, voxel_stride=2, norm_fn=norm_fn, indice_key='focal2'),
+            special_spconv_fn(32, 32, voxel_stride=2, norm_fn=norm_fn, indice_key='focal2') if 2 in use_stages else None,
         )
 
         self.conv3 = SparseSequentialBatchdict(
@@ -169,7 +170,7 @@ class VoxelBackBone8xFocal(nn.Module):
             block(32, 64, 3, norm_fn=norm_fn, stride=2, padding=1, indice_key='spconv3', conv_type='spconv'),
             block(64, 64, 3, norm_fn=norm_fn, padding=1, indice_key='subm3'),
             block(64, 64, 3, norm_fn=norm_fn, padding=1, indice_key='subm3'),
-            special_spconv_fn(64, 64, voxel_stride=4, norm_fn=norm_fn, indice_key='focal3'),
+            special_spconv_fn(64, 64, voxel_stride=4, norm_fn=norm_fn, indice_key='focal3') if 3 in use_stages else None,
         )
 
         self.conv4 = SparseSequentialBatchdict(
