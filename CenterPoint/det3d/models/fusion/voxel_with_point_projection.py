@@ -79,6 +79,7 @@ class VoxelWithPointProjection(nn.Module):
                 voxel_features: (B, C, Z, Y, X), Image voxel features
             voxel_features: (N, C), Sparse Image voxel features
         """
+        encoded_voxel_features = encoded_voxel.features.clone()
         for cam_key in self.image_list:
             cam_key = cam_key.lower()
             # Generate sampling grid for frustum volume
@@ -136,6 +137,7 @@ class VoxelWithPointProjection(nn.Module):
                 voxel_feat[voxel_mask] = self.fusion(image_feat, voxel_feat[voxel_mask], 
                                                     image_grid[point_mask], layer_name)
 
-                encoded_voxel.features[index_mask] = voxel_feat
-
+                
+                encoded_voxel_features[index_mask] = voxel_feat
+        encoded_voxel = encoded_voxel.replace_feature(encoded_voxel_features)
         return encoded_voxel
