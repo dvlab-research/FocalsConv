@@ -107,7 +107,7 @@ class VoxelWithPointProjection(nn.Module):
                 if self.image_interp:
                     image_feat = F.interpolate(image_feat.unsqueeze(0), size=raw_shape[:2], mode='bilinear')[0]
                 index_mask = encoded_voxel.indices[:,0]==_idx
-                voxel_feat = encoded_voxel.features[index_mask]
+                voxel_feat = encoded_voxel_features[index_mask]
                 image_grid = projection_dict['image_grid'][_idx]
                 voxel_grid = projection_dict['batch_voxel'][_idx]
                 point_mask = projection_dict['point_mask'][_idx]
