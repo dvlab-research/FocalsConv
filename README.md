@@ -107,7 +107,6 @@ python -m torch.distributed.launch --nproc_per_node=${NUM_GPUS} ./tools/train.py
 * Note that we use 8 GPUs to train OpenPCdet models and 4 GPUs to train CenterPoint models.
 
 ## TODO List
-- - [ ] Config files and trained models on the overall Waymo dataset.
 - - [x] Config files and scripts for the test augs (double-flip and rotation) in nuScenes test submission.
 - - [ ] Results and models of Focals Conv Networks on 3D Segmentation datasets.
 
