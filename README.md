@@ -14,6 +14,7 @@ Yukang Chen, Yanwei Li, Xiangyu Zhang, Jian Sun, Jiaya Jia<br />
 <p align="center"> <img src="docs/imgs/FocalSparseConv_Pipeline.png" width="100%"> </p>
 
 ## News
+- [2022-08-24] The code for testing augmentations and example have been released [here](https://github.com/dvlab-research/FocalsConv/tree/master/CenterPoint/test_aug_examples).
 - [2022-07-05] The code for ***Focals Conv*** has been marged into the official codebase [OpenPCDet](https://github.com/open-mmlab/OpenPCDet).
 - [2022-06-21] The other 3D backbone network design is presented ***LargeKernel3D*** [[Paper](https://arxiv.org/abs/2206.10555) \| [Github](https://github.com/dvlab-research/LargeKernel3D)]. 
 
@@ -107,7 +108,7 @@ python -m torch.distributed.launch --nproc_per_node=${NUM_GPUS} ./tools/train.py
 
 ## TODO List
 - - [ ] Config files and trained models on the overall Waymo dataset.
-- - [ ] Config files and scripts for the test augs (double-flip and rotation) in nuScenes test submission.
+- - [x] Config files and scripts for the test augs (double-flip and rotation) in nuScenes test submission.
 - - [ ] Results and models of Focals Conv Networks on 3D Segmentation datasets.
 
 
