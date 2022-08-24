@@ -8,5 +8,5 @@ You can change the angle in the config file to get the results tested on other a
 For example, you can use the below codes to combine your results on three angles.
 
 ```shell
-python3 ./tools/nms_better2.py --paths ${your_path_doubleflip}/infos_test_10sweeps_withvelo.json,${your_path_doubleflip_angle6d25}/infos_test_10sweeps_withvelo.json,${your_path_doubleflip_angle-6d25}/infos_test_10sweeps_withvelo.json --work_dir ${output_dir}
+python3 nms_better2.py --paths ${your_path_doubleflip}/infos_test_10sweeps_withvelo.json,${your_path_doubleflip_angle6d25}/infos_test_10sweeps_withvelo.json,${your_path_doubleflip_angle-6d25}/infos_test_10sweeps_withvelo.json --work_dir ${output_dir}
 ```
