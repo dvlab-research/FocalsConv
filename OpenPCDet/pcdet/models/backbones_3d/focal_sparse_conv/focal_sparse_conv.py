@@ -12,12 +12,12 @@ class FocalSparseConv(spconv.SparseModule):
     def __init__(self, inplanes, planes, voxel_stride, norm_fn=None, indice_key=None,
                 image_channel=3, kernel_size=3, padding=1, mask_multi=False, use_img=False,
                 topk=False, threshold=0.5, skip_mask_kernel=False, enlarge_voxel_channels=-1, 
-                point_cloud_range=[-3, -40, 0, 1, 40, 70.4],
+                point_cloud_range=[-3, -40, 0, 1, 40, 70.4], fuse_sum=True,
                 voxel_size = [0.1, 0.05, 0.05]):
         super(FocalSparseConv, self).__init__()
 
         self.conv = spconv.SubMConv3d(inplanes, planes, kernel_size=kernel_size, stride=1, bias=False, indice_key=indice_key)
-        self.bn1 = norm_fn(planes)
+        self.bn1 = norm_fn(planes if fuse_sum else 2 * planes)
         self.relu = nn.ReLU(True)
         offset_channels = kernel_size**3
 
@@ -28,6 +28,7 @@ class FocalSparseConv(spconv.SparseModule):
         self.mask_multi = mask_multi
         self.skip_mask_kernel = skip_mask_kernel
         self.use_img = use_img
+        self.fuse_sum = fuse_sum
 
         voxel_channel = enlarge_voxel_channels if enlarge_voxel_channels>0 else inplanes
         in_channels = image_channel + voxel_channel if use_img else voxel_channel
@@ -216,7 +217,7 @@ class FocalSparseConv(spconv.SparseModule):
         out = self.conv(out)
 
         if self.use_img:
-            out = out.replace_feature(self.construct_multimodal_features(out, x_rgb, batch_dict, True))
+            out = out.replace_feature(self.construct_multimodal_features(out, x_rgb, batch_dict, self.fuse_sum))
 
         out = out.replace_feature(self.bn1(out.features))
         out = out.replace_feature(self.relu(out.features))
