@@ -53,6 +53,23 @@ def sort_by_indices(features, indices, features_add=None):
         features_add = features_add[ind]
     return features, indices, features_add
 
+def sort_by_indices2(features, indices, features_add=None):
+    """
+        To sort the sparse features with its indices in a convenient manner.
+        Args:
+            features: [N, C], sparse features
+            indices: [N, 4], indices of sparse features
+            features_add: [N, C], additional features to sort
+    """
+    idx = indices
+    idx_sum = idx.select(1, 0) * idx[:, 1].max() * idx[:, 2].max() * idx[:, 3].max() + idx.select(1, 1) * idx[:, 2].max() * idx[:, 3].max() + idx.select(1, 2) * idx[:, 3].max() + idx.select(1, 3)
+    _, ind = idx_sum.sort()
+    features = features[ind]
+    indices = indices[ind]
+    if not features_add is None:
+        features_add = features_add[ind]
+    return features, indices, features_add
+
 def check_repeat(features, indices, features_add=None, sort_first=True, flip_first=True):
     """
         Check that whether there are replicate indices in the sparse features, 
@@ -85,8 +102,40 @@ def check_repeat(features, indices, features_add=None, sort_first=True, flip_fir
             features_add = features_add_new / counts
     return features, indices, features_add
 
+def check_repeat2(features, indices, features_add=None, sort_first=True, flip_first=True):
+    """
+        Check that whether there are replicate indices in the sparse features, 
+        remove the replicate features if any.
+    """
+    if sort_first:
+        features, indices, features_add = sort_by_indices2(features, indices, features_add)
 
-def split_voxels(x, b, imps_3d, voxels_3d, kernel_offsets, mask_multi=True, topk=True, threshold=0.5):
+    if flip_first:
+        features, indices = features.flip([0]), indices.flip([0])
+
+    if not features_add is None:
+        features_add=features_add.flip([0])
+
+    idx = indices #[:, 1:].int()
+    #idx_sum = torch.add(torch.add(idx.select(1, 0) * idx[:, 1].max() * idx[:, 2].max(), idx.select(1, 1) * idx[:, 2].max()), idx.select(1, 2))
+    idx_sum = idx.select(1, 0) * idx[:, 1].max() * idx[:, 2].max() * idx[:, 3].max() + idx.select(1, 1) * idx[:, 2].max() * idx[:, 3].max() + idx.select(1, 2) * idx[:, 3].max() + idx.select(1, 3)
+    _unique, inverse, counts = torch.unique_consecutive(idx_sum, return_inverse=True, return_counts=True, dim=0)
+    
+    if _unique.shape[0] < indices.shape[0]:
+        perm = torch.arange(inverse.size(0), dtype=inverse.dtype, device=inverse.device)
+        features_new = torch.zeros((_unique.shape[0], features.shape[-1]), device=features.device)
+        features_new.index_add_(0, inverse.long(), features)
+        features = features_new
+        perm_ = inverse.new_empty(_unique.size(0)).scatter_(0, inverse, perm)
+        indices = indices[perm_].int()
+
+        if not features_add is None:
+            features_add_new = torch.zeros((_unique.shape[0],), device=features_add.device)
+            features_add_new.index_add_(0, inverse.long(), features_add)
+            features_add = features_add_new / counts
+    return features, indices, features_add
+
+def split_voxels(x, b, imps_3d, voxels_3d, kernel_offsets, mask_multi=True, topk=True, threshold=0.5, only_return_add=False):
     """
         Generate and split the voxels into foreground and background sparse features, based on the predicted importance values.
         Args:
@@ -134,6 +183,9 @@ def split_voxels(x, b, imps_3d, voxels_3d, kernel_offsets, mask_multi=True, topk
     selected_indices = torch.cat([torch.ones((selected_indices.shape[0], 1), device=features_fore.device)*b, selected_indices], dim=1)
 
     selected_features = torch.zeros((selected_indices.shape[0], features_ori.shape[1]), device=features_fore.device)
+
+    if only_return_add:
+        return selected_features, selected_indices.int(), mask_kernel_fore
 
     features_fore_cat = torch.cat([features_fore, selected_features], dim=0)
     coords_fore = torch.cat([coords_fore, selected_indices], dim=0)
