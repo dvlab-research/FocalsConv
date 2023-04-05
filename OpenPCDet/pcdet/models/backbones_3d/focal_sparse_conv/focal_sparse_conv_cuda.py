@@ -2,14 +2,14 @@ import torch
 import torch.nn as nn
 import spconv.pytorch as spconv
 from pcdet.ops.roiaware_pool3d.roiaware_pool3d_utils import points_in_boxes_gpu
-from pcdet.models.backbones_3d.focal_sparse_conv.focal_sparse_utils import split_voxels, check_repeat, check_repeat2, FocalLoss
+from pcdet.models.backbones_3d.focal_sparse_conv.focal_sparse_utils import split_voxels, FocalLoss
 from pcdet.utils import common_utils
 from spconv.core import ConvAlgo
 import time
 from pcdet.datasets.processor.data_processor import VoxelGeneratorWrapper
 from spconv.pytorch.cppcore import torch_tensor_to_tv
 from spconv.utils import Point2VoxelGPU3d
-from pcdet.ops.check_repeat.check_repeat_utils import CheckRepeat
+#from pcdet.ops.check_repeat.check_repeat_utils import CheckRepeat
 from spconv.pytorch.spatial import RemoveDuplicate
 
 class FocalSparseConvCUDA(spconv.SparseModule):
@@ -35,7 +35,7 @@ class FocalSparseConvCUDA(spconv.SparseModule):
         self.mask_multi = mask_multi
         self.skip_mask_kernel = skip_mask_kernel
         self.use_img = use_img
-        self.checkrepeat = CheckRepeat()
+        #self.checkrepeat = CheckRepeat()
         self.time = [0, 0, 0, 0]
         self.indice_key = indice_key
 
