@@ -107,10 +107,7 @@ python -m torch.distributed.launch --nproc_per_node=${NUM_GPUS} ./tools/train.py
 
 * Note that we use 8 GPUs to train OpenPCdet models and 4 GPUs to train CenterPoint models.
 
-## TODO List
-- - [x] Config files and scripts for the test augs (double-flip and rotation) in nuScenes test submission.
-- - [ ] Results and models of Focals Conv Networks on 3D Segmentation datasets.
-
+* Note that for model size counting of multi-modal model, please refer to this [issue](https://github.com/dvlab-research/FocalsConv/issues/9).
 
 ## Citation 
 If you find this project useful in your research, please consider citing:
